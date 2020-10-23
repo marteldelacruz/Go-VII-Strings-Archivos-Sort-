@@ -19,7 +19,7 @@ func sortList(values *[]string, order string) {
 		sort.Strings(*values)
 		break
 	case DES:
-		sort.Strings(sort.Reverse(sort.StringSlice(*values)))
+		sort.Sort(sort.Reverse(sort.StringSlice(*values)))
 		break
 	}
 }
@@ -62,9 +62,15 @@ func main() {
 		list = append(list, temp)
 	}
 
-	// print list
+	// saving asc file
+	sortList(&list, ASC)
+	if saveToFile(&list, "asecendente.txt") {
+		fmt.Println("asecendente.txt file saved...")
+	}
+
+	// saving des file
 	sortList(&list, DES)
-	for _, s := range list {
-		fmt.Println(s)
+	if saveToFile(&list, "descendente.txt") {
+		fmt.Println("descendente.txt file saved...")
 	}
 }
